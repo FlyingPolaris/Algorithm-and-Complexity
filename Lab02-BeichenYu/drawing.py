@@ -72,11 +72,15 @@ def catch_num():
     try:
         num = int(var)
         if num > 10:
-            messagebox.showwarning('Warning', 'The number is too big!(Please input a number from 1 to 10)')
+            messagebox.showwarning('Warning', 'The number is too big!(Please input a valid integer from 1 to 10)')
+            inputer.delete(0, 'end')
+            catch_num()
+        elif num <= 0:
+            messagebox.showwarning('Warning', 'The number is too small!(Please input a valid integer from 1 to 10)')
             inputer.delete(0, 'end')
             catch_num()
     except:
-        messagebox.showwarning('Warning', 'Not a valid integer!')
+        messagebox.showwarning('Warning', 'Not a valid integer!(Please input a valid integer from 1 to 10)')
         inputer.delete(0, 'end')
         catch_num()
     create_line()
