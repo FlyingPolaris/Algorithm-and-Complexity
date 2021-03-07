@@ -1,0 +1,279 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath,amscd,amsbsy,amssymb,latexsym,url,bm,amsthm}
+\usepackage{epsfig,graphicx,subfigure}
+\usepackage{enumitem,balance}
+\usepackage{wrapfig}
+\usepackage{mathrsfs,euscript}
+\usepackage[usenames]{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage[vlined,ruled,linesnumbered]{algorithm2e}
+\usepackage{threeparttable}
+\usepackage{makecell}
+\hypersetup{colorlinks=true,linkcolor=black}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem*{solution}{Solution}
+\newtheorem{definition}{Definition}
+\theoremstyle{definition}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\postscript}[2]
+ {\setlength{\epsfxsize}{#2\hsize}
+  \centerline{\epsfbox{#1}}}
+
+\renewcommand{\baselinestretch}{1.0}
+
+\setlength{\oddsidemargin}{-0.365in}
+\setlength{\evensidemargin}{-0.365in}
+\setlength{\topmargin}{-0.3in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{10.1in}
+\setlength{\textwidth}{7in}
+\makeatletter \renewenvironment{proof}[1][Proof] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+\makeatletter
+\renewenvironment{solution}[1][Solution] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+
+\begin{document}
+\noindent
+
+%========================================================================
+\noindent\framebox[\linewidth]{\shortstack[c]{
+\Large{\textbf{Lab01-Algorithm Analysis}}\vspace{1mm}\\
+CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
+\begin{center}
+\footnotesize{\color{red}$*$ If there is any problem, please contact TA Haolin Zhou. Also please use English in homework.}
+
+% Please write down your name, student id and email.
+\footnotesize{\color{blue}$*$ Name: Beichen Yu  \quad Student ID: 519030910245 \quad Email: polarisybc@sjtu.edu.cn}
+\end{center}
+
+\begin{enumerate}
+
+
+\item \textit{Complexity Analysis.} Please analyze the time and space complexity of Alg.~\ref{Alg-quicksort} and Alg.~\ref{Alg-cocktailsort}. \par
+
+\begin{minipage}[t]{0.45\textwidth}
+	\begin{algorithm}[H]
+		\KwIn{An array $A[1,\cdots,n]$}
+		\KwOut{$A[1,\cdots,n]$ sorted nondecreasingly}
+		
+		\BlankLine
+		\caption{QuickSort}\label{Alg-quicksort}
+		
+		%\If{$n \le 1$}{
+		%  \Return\;
+		%}
+		
+		$pivot \leftarrow A[n]$; $i \leftarrow 1$\;
+		\For{$j \leftarrow 1$ \KwTo $n-1$}{
+			\If{$A[j] < pivot$}{
+				swap $A[i]$ and $A[j]$\;
+				$i \leftarrow i+1$\;
+			}
+		}
+		
+		swap $A[i]$ and $A[n]$\;
+		\lIf{$i>1$}{$\operatorname{QuickSort}(A[1,\cdots,i-1])$}
+		\lIf{$i<n$}{$\operatorname{QuickSort}(A[i+1,\cdots,n])$}
+	\end{algorithm}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\begin{algorithm}[H]
+\KwIn{An array $A[1,\cdots,n]$}
+\KwOut{$A[1,\cdots,n]$ sorted nonincreasingly}
+\BlankLine
+\caption{CocktailSort}
+\label{Alg-cocktailsort}
+\BlankLine
+	$i\leftarrow 1;$ $j\leftarrow n;$$sorted\leftarrow false$\;
+	\While{\textbf{not} sorted}{
+		$sorted \leftarrow true$\;
+		\For{$k\leftarrow i$ \textbf{to} $j-1$}{
+			\If{$A[k] < A[k+1]$}{
+				swap $A[k]$ and $A[k+1]$\;
+				$sorted\leftarrow false$\;
+			}
+		}
+		$j\leftarrow j-1$\;
+		
+
+		\For{$k\leftarrow j$ \textbf{downto} $i+1$}{
+			\If{$A[k-1] < A[k]$}{
+				swap $A[k-1]$ and $A[k]$\;
+				$sorted\leftarrow false$\;
+			}
+		}
+		$i\leftarrow i+1$\;
+	}
+\end{algorithm}
+\end{minipage}
+
+\begin{enumerate}
+	 
+\item Fill in the blanks and \textbf{explain} your answers. You need to answer when the best case and the worst case happen. 
+\begin{table}[!h]
+
+\label{Tab-compare}
+	\centering
+	\begin{threeparttable}
+	\begin{tabular}{c|c| c }
+		\toprule[2pt]
+		\textbf{Algorithm} & \textbf{Time Complexity}\tnote{1} & \textbf{Space Complexity} \\
+		\hline
+		\hline
+		$QuickSort$ & \makecell{best: $O(n\log n)$\\worst: $O(n^2)$\\average: $O(n\log n)$} & \makecell{best: $ O(\log n)$\\ worst: $O(n)$\\ average: $O(\log n)$}\\
+		\hline
+		$CocktailSort$ &\makecell{best: $O(n)$\\worst: $O(n^2)$\\average: $O(n^2)$}   & $O(1)$  \\
+		\bottomrule[2pt]
+
+
+	\end{tabular}
+%    \begin{tablenotes}
+%    	\footnotesize
+%    	\item[1] The response order can be given in \emph{best}, \emph{average}, and \emph{worst}.
+%    \end{tablenotes}
+	\end{threeparttable}
+\end{table}
+
+\item For Alg.~\ref{Alg-quicksort}, how to modify the algorithm to achieve the same expected performance as the \textbf{average} case when the \textbf{worst} case happens?
+\end{enumerate} 
+    \begin{solution}
+    \begin{enumerate}    
+    \item
+        First, let us consider the QuickSort algorithm. In fact, this algorithm makes a partition(from line 2 to line 5), and then finish the recursion(from line 7 to line 8). When analysing the complexity of it, we should consider the two steps as well.
+
+        The partition is easy, just doing a loop, so the time it spend is just linear. And once we chosen the pivot, we repeat the algorithm on its left part and its right part. If we denote the time we use the Alg.~\ref{Alg-quicksort} to sort an array of length $n$ by $T(n)$, than we have:
+        \begin{align*}
+        T(n) = T(j-1) + T(n-j) + cn
+        \end{align*}
+        Above, $j$ is the index of the pivot, and $cn$ represents the time used for partition. When the array is empty or there is only one item inside, we don't need to sort, so $T(0) = T(1) = 1$.
+
+        When the best case happened, the array is always just divided into two arrays of equal length, which means $T(n) = T(n/2) + T(n/2) + cn = 2T(n/2) = cn$. Then we can make a iteration:
+        \begin{align*}
+        T(n) &= 2T(\frac{n}{2}) + cn \\
+        &= 2(T(\frac{n}{4}) + c\frac{n}{2}) + cn\\
+        &= 2T(\frac{n}{4}) + 2cn\\
+        &= 4T(\frac{n}{8}) + 4cn\\
+        &\cdots\\
+        &= kT(1) + kcn
+        \end{align*}
+        
+        $k$ is the number of iteration times, and obviously it is equal to $\log n$. So in the best case, the time complexity of the Alg.~\ref{Alg-quicksort} is $O(n\log n)$.
+        
+        When the worst case happened, the array always bad divided, which means one part is empty and the other part has all the items in the origin array. That is $T(n) = T(0) + T(n-1) + cn$. Then we make a iteration:
+        \begin{align*}
+        T(n) &= T(n-1) + cn + 1\\
+        &= T(n-2) +c(n-1) + cn + 2\\
+        &\cdots\\
+        &= T(0) + c\frac{n(n-1)}{2} + n\\
+        &= c\frac{n(n-1)}{2} + n + 1
+        \end{align*}
+        Obviously in the worst case the time complexity of the Alg.~\ref{Alg-quicksort} is $O(n^2)$.
+        
+        For the average case, we consider the index of the pivot has equal possibilities from 1 to n. Regarding  $T(n) = T(j-1) + T(n-j) + cn$, let $j$ from 1 to $n$, and add these equations together:
+        $$nT(n) = 2\sum^{n-1}_{i=0}T(i)+cn^2$$
+        Using misplaced subtraction we get:
+        $$nT(n) - (n-1)T(n-1) = 2T(n-1)+c(2n-1)$$
+        Do some mathematical processing on this equation:
+
+        $$nT(n) = (n+1)T(n-1) + c(2n-1)$$
+        \begin{align*}
+        \frac{T(n)}{n+1} &= \frac{T(n-1)}{n} + c\frac{2n-1}{n(n+1)} \\
+        &= T(0) + c\sum^{n}_{i=1}\frac{2i-1}{i(i+1)}\\
+        &= T(0) + 2c\sum^{n}_{i=1}\frac{1}{i+1} - c\sum^{n}_{i=1}\frac{1}{i(i+1)}\\
+        &\rightarrow T(0)+2c\log(n+1) - c(1-\frac{1}{n+1}) (n \rightarrow \infty)       
+        \end{align*}
+        
+        So we get: $$T(n) = 2c(n+1)\log(n+1) +(1-c)n+1$$
+        Which means in average the time complexity of the Alg.~\ref{Alg-quicksort} is $O(n\log n)$.
+        
+        The space complexity of the algorithm is easier. During each recursion, we do not use additional space, so the space complexity is equal to the number of times we make the recursion. In the best case, each time we divide the array by half, so finally we do the recursion by $\log n$ times, which means that the space complexity is $O(\log n)$. In the worst case, each time we just decrease the length of the array by one item, so finally we do the recursion by $n$ times, which means that the space complexity is $O(n)$. In the average, as the time complexity is $n\log n$ and during each partition the time we need to spend is $n$, we can conclude that we make the partition for $\log n$ times, which means the space complexity is $O(\log n)$ in average.
+        
+        The CocktailSort is the improved version of the BubbleSort. In the algorithm, there is no additional space need, and no recursion is used, which means that the space complexity is always $O(1)$.
+        
+        In the algorithm, each turn we can make sure the smallest and the biggest number are in the right place. Then we can ignore the two number and sort other numbers in the array, until we find the whole array is sorted. In the best case, we find the array is already sorted in the first turn, and it take us only time of $2n$. IN the worst case, we take $n/2$ turns to make sure the array is finally sorted. The time finally we take is:
+        $$T(n) = 2n + 2(n - 2) + \cdots + 2 = n(n+1)/2$$
+        So in the worst case the time complexity is $O(n^2)$.
+        In the average case, it takes $n/4$ turns, so:
+        $$T(n) = 2n + 2(n-2) + \cdots + 2(n-2\times (n/4 -1)) = (3n+4)n/8 $$
+        Which means in the average case the time complexity is $O(n^2)$.
+        
+        \item Consider the chosen of pivot. In the Alg.~\ref{Alg-quicksort}, we always choose the last item in an array as the pivot. If it is the smallest or the biggest item in the array, then when we make the partition we will get into the worst case.
+        
+        It is easy to solve the problem. We can choose the first item, the last item and the item in the middle in the array and make a comparison, and set the pivot as the item that neither the biggest one nor the smallest one. Then we can make sure that the worst case will never happen.
+        \newpage
+        \begin{algorithm}[htbp]
+		\KwIn{An array $A[1,\cdots,n]$}
+		\KwOut{$A[1,\cdots,n]$ sorted nondecreasingly}
+		
+		\BlankLine
+		\caption{QuickSort-modified}\label{Alg-quicksort-modified}
+		
+		%\If{$n \le 1$}{
+		%  \Return\;
+		%}
+		
+		$pivot \leftarrow middle(A[n],A[1],A[n/2])$; $i \leftarrow 1$\;
+		\For{$j \leftarrow 1$ \KwTo $n-1$}{
+			\If{$A[j] < pivot$}{
+				swap $A[i]$ and $A[j]$\;
+				$i \leftarrow i+1$\;
+			}
+		}
+		
+		swap $A[i]$ and $A[n]$\;
+		\lIf{$i>1$}{$\operatorname{QuickSort}(A[1,\cdots,i-1])$}
+		\lIf{$i<n$}{$\operatorname{QuickSort}(A[i+1,\cdots,n])$}
+	\end{algorithm}
+        
+    \end{enumerate}
+    
+    \end{solution}
+
+\item \textit{Growth Analysis.} Rank the following functions by order of growth with brief explanations: that is, find an arrangement $g_1, g_2, \ldots , g_{15}$ of the functions $g_1 = \Omega(g_2), g_2 = \Omega(g_3), \ldots, g_{14} = \Omega(g_{15})$.  Partition your list into equivalence classes such that functions $f(n)$ and $g(n)$ are in the same class if and only if $f(n) = \Theta(g(n))$. Use symbols ``$=$'' and ``$\prec$'' to order these functions appropriately. Here $\log n$ stands for $\ln n$.
+$$
+\begin{array}{ccccc}
+	1 \quad & \quad n \quad & \quad \log n \quad & \quad \log (\log n) \quad & \quad n \log n \\
+	\log_4 n \quad & \quad 2^n \quad & \quad 4^n \quad & \quad 2^{\log n} \quad & \quad 2^{2^n} \\
+	\log (n!) \quad & \quad n! \quad & \quad (2n)! \quad & \quad  n^{1/2} \quad & \quad n^2 \\
+\end{array}
+$$
+    \begin{solution}
+$$    
+    \begin{array}{cccccccccc}
+	&1 &\prec & \log(\log n)&\prec & \log n&=& \log_4 n &\prec &n^{1/2}\\
+	\prec& 2^{\log n}&\prec& n &\prec&n\log n &=&\log (n!) &\prec&n^2 \\
+	\prec& 2^n&\prec& 4^n &\prec & n!&\prec &(2n)!& \prec&2^{2^n}\\
+\end{array}
+$$
+
+\begin{enumerate}
+\item $2^{\log n}$: Using the bottom change formula,we get that
+$2^{\ln n} = 2^{\frac{\log_2 n}{\log_2 \mathrm{e}}} = \sqrt[\log_2 \mathrm{e}]{n}$.
+As $1 < \log_2 \mathrm{e} < 2$, we can know that $n^{1/2}\prec 2^{\log n}\prec n $.
+
+\item $\log (n!)$: According the Stirling's approximation, we know that $n! \approx \sqrt{2 \pi n}(\frac{n}{\mathrm{e}})^{n}$, so $\ln (n!) \approx \ln (\sqrt{2 \pi n}(\frac{n}{\mathrm{e}})^{n}) = \frac{1}{2}\ln(2 \pi n) + n\ln (\frac{n}{\mathrm{e}})$. So  $\log (n!) = n\log n$.
+
+\item $2^{2^n}$: $2^{2^{n}} = (2^{n})^{\frac{2^{n}}{n}}$. When $n$ is big, $2^{n}>2n$ and $2^{n} > 2n^2$, so $(2^{n})^{\frac{2^{n}}{n}} > (2n)^{2n}$. Obviously, we have $(2n)!\prec(2n)^{2n}$, so $(2n)! \prec 2^{2^{n}}$.
+\end{enumerate}
+
+Others are easy to make the comparison.
+    \end{solution}
+
+
+\end{enumerate}
+
+\vspace{20pt}
+
+\textbf{Remark:} You need to include your .pdf and .tex files in your uploaded .rar or .zip file.
+
+%========================================================================
+\end{document}

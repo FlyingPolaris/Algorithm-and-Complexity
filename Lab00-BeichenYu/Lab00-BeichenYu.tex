@@ -1,0 +1,153 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{ctex}
+\usepackage{amsmath,amscd,amsbsy,amssymb,latexsym,url,bm,amsthm}
+\usepackage{epsfig,graphicx,subfigure}
+\usepackage{enumitem,balance}
+\usepackage{wrapfig}
+\usepackage{mathrsfs,euscript}
+\usepackage[usenames]{xcolor}
+\usepackage{hyperref}
+\usepackage[vlined,ruled,linesnumbered]{algorithm2e}
+\hypersetup{colorlinks=true,linkcolor=black}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem*{solution}{Solution}
+\newtheorem{definition}{Definition}
+\theoremstyle{definition}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\postscript}[2]
+ {\setlength{\epsfxsize}{#2\hsize}
+  \centerline{\epsfbox{#1}}}
+
+\renewcommand{\baselinestretch}{1.0}
+
+\setlength{\oddsidemargin}{-0.365in}
+\setlength{\evensidemargin}{-0.365in}
+\setlength{\topmargin}{-0.3in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{10.1in}
+\setlength{\textwidth}{7in}
+\makeatletter \renewenvironment{proof}[1][Proof] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+\makeatletter
+\renewenvironment{solution}[1][Solution] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+
+\begin{document}
+\noindent
+
+%========================================================================
+\noindent\framebox[\linewidth]{\shortstack[c]{
+\Large{\textbf{Lab00-Proof}}\vspace{1mm}\\
+CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
+\begin{center}
+\footnotesize{\color{red}$*$ If there is any problem, please contact TA Haolin Zhou.}
+
+% Please write down your name, student id and email.
+\footnotesize{\color{blue}$*$ Name:Beichen Yu  \quad Student ID:519030910245 \quad Email: polarisybc@sjtu.edu.cn}
+\end{center}
+
+\begin{enumerate}
+    \item
+    Prove that for any integer $n>2$, there is a prime $p$ satisfying $n<p<n!$. {\color{blue}(Hint: consider a prime factor $p$ of $n!-1$ and prove by contradiction)}
+    \begin{proof}
+        Consider the number $n!-1$.
+        
+        If $n!-1$ is a prime, then the proposition is proved.
+        
+        Otherwise, if $n!-1$ is a composite number, then $\exists$ a prime number $p$ which is a prime factor of $n!-1$.
+        
+        If $p > n$, then the proposition is proved.
+        
+        Otherwise, if $p \leqslant n$, then $p$ is a prime factor of $n!$.
+        
+        Now that $p|n!$ and $p|n!-1$, we get $p|1$, which is obviously impossible.
+    \end{proof}
+
+    \item
+    Use the minimal counterexample principle to prove that for any integer $n\ge 7$, there exists integers $i_n\ge 0$ and $j_n\ge 0$, such that $n = i_n \times 2 + j_n \times 3$.
+    \begin{proof}
+    
+    If there are values of $n$ for which there does not exists such $i_n$ and $ j_n $, then there must be a smallest such value, say $n = k$.
+    
+    Since $0 \times 2 + 0 \times 3=0$, we have $i_n\geqslant 1$ or $j_n \geqslant1$.
+    
+    Since $k$ is the smallest value that cannot be written in that form, then $k-1$ can be written in that form, which means there exists integers $i_{k-1}\geqslant 0$ and $j_{k-1}\geqslant 0$, such that $k-1 = i_{k-1} \times 2 + j_{k-1}\times3$.
+    
+    However, we have
+    \begin{align*}
+     k &= k-1+1\\
+    &=i_{k-1} \times 2 + j_{k-1}\times3 + 3 - 2\\
+    &=(i_{k-1}-1) \times 2 + (j_{k-1}+1)\times3
+    \end{align*}
+    
+    and 
+    \begin{align*}
+     k &= k-1+1\\
+    &=i_{k-1} \times 2 + j_{k-1}\times3 + 2 \times 2 - 3\\
+    &=(i_{k-1}+2) \times 2 + (j_{k-1}-1)\times3
+    \end{align*}
+    
+    Since at least one of $i_{k-1}$ and $j_{k-1}$ is not $0$, we can make sure $k$ can be written in that form as well. We have derived a contradiction, which allows us to conclude that our original assumption is false.   
+    \end{proof}
+
+    \item
+    Suppose the function $f$ be defined on the natural numbers recursively as follows: $f(0)=0$, $f(1)=1$, and $f(n)=5f(n-1)-6f(n-2)$, for $n\geq 2$. Use the strong principle of mathematical induction to prove that for all $n\in N$, $f(n)=3^n-2^n$. 
+    \begin{proof}
+        We proof the proposition is true for $n \geqslant 0$ by induction.
+        
+        \textbf{Basis step.} When $n = 0$, $f(0) = 3^0-2^0 = 0$, and the proposition is obviously true.
+        
+        \textbf{Introduction Hypothesis.} Assume when $0 \leqslant i \leqslant k$ the proposition is true, which means $f(i)=3^i-2^i$.
+        
+        \textbf{Proof of Induction Step.} Now let us prove that when $n=k+1$ the proposition is true.
+        \begin{align*}
+        f(k+1)&= 5f(k)-6f(k-1)\\
+        &= 5\times(3^k-2^k) - 6\times(3^{k-1}-2^{k-1})\\
+        &= (5-6\div3)\times3^k - (5-6\div2)\times2^k\\
+        &=3\times3^k-2\times2^k\\
+        &=3^{k+1}-2^{k+1}
+        \end{align*}
+    \end{proof}
+
+    \item
+    An $n$-team basketball tournament consists of some set of $n\geq2$ teams. Team $p$ beats team $q$ iff $q$
+does not beat $p$, for all teams $p\neq q$. A sequence of distinct teams $p_{1}$, $p_{2}$,..., $p_{k}$, such that team $p_{i}$ beats team $p_{i+1}$ for $1\leq i<k$ is called a ranking of these teams. If also team $p_{k}$ beats team $p_{1}$, the ranking is called a \emph{k-cycle}. 
+
+Prove by mathematical induction that in every tournament, either there is a ``champion" team that beats every other team, or there is a 3-cycle. 
+    \begin{proof}
+        Define $P(n)$ be the statement that``in every tournament, either there is a `champion' team that beats every other team, or there is a 3-cycle". We try to prove that $P(n)$ is true for every $n \geqslant 2$ by induction.
+        
+        \textbf{Basis step.} $P(2)$ is true, since there is obviously a team beat another when there are only two teams. $P(3)$ is true as well, since when there are three teams, either a team beats the other two, or there is a 3-cycle.
+        
+        \textbf{Introduction Hypothesis.} Assume that $P(k)$ is true for $k \geqslant 2$.
+        
+        \textbf{Proof of Induction Step.} Let us prove $P(k+1)$.
+        
+        We divide the $k+1$ teams into two parts, with $k$ teams in one part and only one team in the other. Since $P(k)$ is true, either there is a ``champion" team that beats every other team in the first part, or there is a 3-cycle in the first part. 
+        
+        If the there is a 3-cycle in the first part, then obviously the 3-cycle still exists in the $k+1$ teams. Then $P(k+1)$ is true.
+        
+        If  there is a ``champion" team that beats every other team in the first part, we can define the ``champion" team as $p_{c}$ in $p_{1},p_{2}\ldots,p_{k}$, and the team in the other part as $p_{k+1}$. 
+        
+        If $p_{k+1}$ beats every team in the first part, then $p_{k+1}$ is the ``champion" team in the $k+1$ teams, $P(k+1)$ is true. 
+        
+        If $p_{k+1}$ does not beat all the teams in the first part, then there is a $p_i$ beats $p_{k+1}$. If $p_c$ beats $p_{k+1}$, then $p_c$ is the ``champion" team in the $k+1$ teams, $P(k+1)$ is true. 
+        
+        If $p_c$ does not beat $p_{k+1}$,then $p_i$ is not $p_c$. So $p_i$ beats $p_{k+1}$, $p_{k+1}$ beats $p_{c}$ and $p_c$ beats $p_i$: there is a 3-cycle, which means $P(k+1)$ is true.
+        
+    \end{proof}
+
+\end{enumerate}
+
+\vspace{20pt}
+
+\textbf{Remark:} You need to include your .pdf and .tex files in your uploaded .rar or .zip file.
+
+%========================================================================
+\end{document}
