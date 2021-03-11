@@ -170,9 +170,80 @@ We can not use the Master Theorem to solve this problem. We know $n\log n = O(n^
 \item Prove that a transposition network with $n$ inputs is a sorting network if and only if it sorts the sequence $\langle n, n-1, \cdots, 1 \rangle$. {\color{blue}(Hint: Use an induction argument analogous to the \emph{Domain Conversion Lemma}.)}
 \item {\color{red}{(Optional Sub-question with Bonus)}} Given any $n \in \mathbb{N}$, write a program using Tkinter in Python to draw a figure similar to Fig.~\ref{Fig-Transposition} with $n$ input wires.
 \end{enumerate}
+
+\begin{solution}
+
+\begin{enumerate}
+\item 
+
+(To solve the problem, I referred to the solution of the 27th section of CLRS book, 2nd edition.)\\
+
+We use $D_0$ to on behalf of the sequence $\langle n, n-1, \cdots, 1 \rangle$, and $X_0$ to on behalf of any possible input sequence $\langle x_1, x_2, \cdots, x_n \rangle$. We number the comparator in order from left to right. Each time when the input sequence passing by a comparator, the sequence may take a change, and we sign the sequence just passed by the comparator $k$ as $D_k$ or $X_k$. And we sign the $i$-th number in the sequence, which means it is on the $i$-th line at that time, as $D_k(i)$ or $X_k(i)$.\\
+ 
+To solve the problem, first we can try to prove the proposition below:\\
+
+For $\forall k$, if $\forall i<j$ and $D_k(i)<D_k(j)$, then $X_k(i)<X_k(j)$.\\
+
+We use induction to prove it.\\
+
+First, when $k=0$, $\forall i<j$, $D_k(i) = n -i > D_k(j) = n-j$, so $D_k(i)<D_k(j)$ will never happen. So the proposition is true. We assume that $i<j$ and $D_k(i)<D_k(j)$, next we will prove that $X_k(i)<X_k(j)$.\\
+
+Second, we assume that when the sequence just passed by the comparator $k-1$, the proposition is true. Next we have to prove that when the sequence just passed by the comparator $k$, the proposition is true. Let us discuss it by cases.\\
+
+Case 1: Line $i$ and line $j$ are just the upper and lower sides of the $k$-th comparator. With the effect of the comparator, $X_k(i)<X_k(j)$ is obviously.\\
+
+Case 2: Both of line $i$ and line $j$ are not the upper and lower sides of the $k$-th comparator. So both of
+them do not change value during this process. So $D_k(i)<D_k(j)$ means $D_{k-1}(i)<D_{k-1}(j)$, and by the inductive assumption $X_{k-1}(i)<X_{k-1}(j)$, then $X_{k}(i)<X_{k}(j)$ is true.\\
+
+Case 3: Line $i$ is the upper side of the $k$-th comparator, and $j>i+1$. That is to say, line $j$ is under the lower side of the $k$-th comparator. By the inductive assumption $X_{k-1}(i)<X_{k-1}(j)$, so after passing the comparator, if the exchange happened, $X_k(j) = X_{k-1}(j) > X_{k-1}(i) = X_k(i+1) > X_k(i)$; if the exchange did not happen, $X_k(j) = X_{k-1}(j) > X_{k-1}(i) = X_k(i)$. So $X_{k}(i)<X_{k}(j)$ is true.\\
+
+Case 4: Line $i$ is the lower side of the $k$-th comparator, and $j>i+1$. That is to say, line $j$ is under the lower side of the $k$-th comparator. After passing the comparator, if the exchange happened, $D_k(i) = D_{k-1}(i-1)$, so $D_{k-1}(i-1) = D_k(i) < D_k(j) = D_{k-1}(j)$, as $i-1 <j$, by the inductive assumption we have $X_{k-1}(i-1) < X_{k-1}(j)$, the $X_{k}(i)<X_{k}(j)$; if the exchange did not happen, $X_k(j) = X_{k-1}(j) > X_{k-1}(i) = X_k(i)$. So $X_{k}(i)<X_{k}(j)$ is true.\\
+
+Case 5: Line $j$ is the lower side of the $k$-th comparator, and $i<j-1$. That is to say, line $i$ is above the upper side of the $k$-th comparator. The same as Case 3.\\
+
+Case 6: Line $j$ is the upper side of the $k$-th comparator, and $i<j-1$. That is to say, line $i$ is above the upper side of the $k$-th comparator. The same as Case 4.\\
+
+The 6 cases are all the cases, so the proposition is proved.\\
+
+In particular, if $k$ is the number of the comparators int the transposition network, then $D_k$ and $X_k$ are the final output. Because $\forall i<j$ we have $D_k(i) = i < D_k(j) = j$, according to the proposition we proved above, $X_k(i)  < X_k(j)$. That means the transposition network is a sorting network. 
+
+\item
+
+The source code ``drawing.py" is in the .zip file.
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=7.5cm]{n=5.png}
+\caption{n = 5}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=7.5cm]{n=10.png}
+\caption{n = 10}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=7.5cm]{n=20.png}
+\caption{n = 20}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=7.5cm]{n=50.png}
+\caption{n = 50}
+\end{minipage}
+\end{figure}
+
+
 \end{enumerate}
-%\begin{solution}
-%response...
-%\end{solution}
+
+
+\end{solution}
+\end{enumerate}
+
 %========================================================================
 \end{document}
