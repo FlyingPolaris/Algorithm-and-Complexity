@@ -50,7 +50,7 @@ CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
 \begin{center}
 \footnotesize{\color{red}$*$ If there is any problem, please contact TA Haolin Zhou.}\par
 % Please write down your name, student id and email.
-\footnotesize{\color{blue}$*$ Name:\_\_\_\_\_\_\_\_\_  \quad Student ID:\_\_\_\_\_\_\_\_\_ \quad Email: \_\_\_\_\_\_\_\_\_\_\_\_}
+\footnotesize{\color{blue}$*$ Name:BeichenYu  \quad Student ID:519030910245 \quad Email:polarisybc@sjtu.edu.cn}
 \end{center}
 
 \begin{enumerate}
@@ -83,7 +83,7 @@ CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
         \begin{enumerate}
         \item First choose as many $25M$ contacts as possible. When the remain contacts is less then $25M$, choose as many $10M$ contacts as possible. When the remain contacts is less then $10M$, choose as many $5M$ contacts as possible. When the remain contacts is less then $5M$, use enough $1M$ contracts to fill up.
         
-        I will prove the correctness of the solution. In this problem, if you want to fill up a bigger contract, you have to use at least two smaller contracts. So if you don't maximize the bigger contract, you can only use more smaller contracts to fill up the blank. So the solution is correct.
+        First let us assume that if using this greedy algorithm, $n = m_1\times 1M+m_2\times 5M+m_3\times 10M+ m_4 \times 25M$. $m_1 < 5$ is obvious because if we have 5 players with a $1M$ contact, a player with a $5M$ contract is a better choice. For the same result, $m_2 < 2$, and 2 of $10M$ player can not exist together with a $5M$ player. We proof that the number of $25M$ must be $m_3$. We assume that there is a better algorithm and $n = p_1\times 1M+p_2\times 5M+p_3\times 10M+ p_4 \times 25M$. Because we use the greedy algorithm, $m_3 \geqslant p_3$. But if $p_3<m_3$, there is at least $25M$ must use $1M,5M$ and $10M$ to get. But it is impossible because we have at most 4 of $1M$ players, 1 of $5M$ player and available $10M$ players. So $m_3 = p_3$. Using the same method, we can proof that $m_2 = p_2, m_1 = p_1$ and $m_0 = p_0$. That is to say that the greedy algorithm is right. 
         
         \item If using the greedy algorithm, $n = m_0c^0 + m_1c^1 + \cdots + m_kc^k$ and we assume that there is a better algorithm, $n = n_0c^0 + n_1c^1 + \cdots + n_kc^k$. 
 
