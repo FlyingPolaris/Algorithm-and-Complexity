@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.3)  24 MAR 2021 23:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.3)  25 MAR 2021 22:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -515,17 +515,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--69
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
 
  []
 
@@ -537,8 +532,14 @@ g (ext4): destination with the same identifier (name{table.1}) has been already
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.144     	        	\begin
-                          {minipage}[t]{0.8\textwidth}]
+l.159         \item W
+                     e set $A=\{1,2\}, B=\{3,4\} ,C = \{5,6\}$, and $c(2,3,5...
+]
+Underfull \hbox (badness 10000) in paragraph at lines 160--161
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
@@ -553,31 +554,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
-
- []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 185.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 183.
 [3pdfTeX warning (ext4): destination with the same identifier (name{algocf.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.185 \end{document}
+l.183 \end{document}
                     ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 185.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 183.
  (./Lab04-Matroid.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 185.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 185.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 183.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 183.
 Package rerunfilecheck Info: File `Lab04-Matroid.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 185.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 183.
  ) 
 Here is how much of TeX's memory you used:
  8255 strings out of 492623
  118476 string characters out of 6133291
- 233624 words of memory out of 5000000
+ 234624 words of memory out of 5000000
  11993 multiletter control sequences out of 15000+600000
  18659 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -595,7 +591,7 @@ texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2
 dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2019/texmf-dist/font
 s/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2019/texmf-dist/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Lab04-Matroid.pdf (3 pages, 170313 bytes).
+Output written on Lab04-Matroid.pdf (3 pages, 170102 bytes).
 PDF statistics:
  112 PDF objects out of 1000 (max. 8388607)
  92 compressed objects within 1 object stream

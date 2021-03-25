@@ -63,9 +63,7 @@ CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
 	    	
 	    	(Exchange property) For convenience, let $n=|V|$. Let $A \in C$, which means $(V,E \backslash A)$ is a connected graph. So $|E\backslash A| \geqslant n-1$. Consider a set $B$ that $|B|<|A|$, then we have $|E\backslash B| \geqslant |E\backslash A|$. So $|E\backslash B| \geqslant n$, which means there is at least a circle in $(V,E \backslash B)$. \\
 	    	
-	    	Because $|E\backslash B| \geqslant |E\backslash A|$ and both of them is connected, we can make sure that the number of edges in all circles in $(V,E \backslash B)$ is bigger than that in $(V,E \backslash A)$. So we can prove that we can find a edge $e$ in a circle in $(V,E \backslash B)$ that is not used in $(V,E \backslash A)$. \\
-	    	
-	    	If it is false, then the edges in circles in $(V,E \backslash B)$ is less or equal then that in $(V,E \backslash A)$, however with same number of vertices, the edges out of circles in $(V,E \backslash B)$ can not be more then that in $(V,E \backslash A)$.\\
+	    	Because $|E\backslash B| \geqslant |E\backslash A|$ and both of them is connected, and they have the same number of vertices, so there are more circles in $(V,E \backslash B)$ than in $(V,E \backslash A)$. Then we can find a edge $e$ in a circle in $(V,E \backslash B)$ that is not used in $(V,E \backslash A)$. \\
 	    	
 	    	 That means $e \in A$ while $e \notin B$, which is $e \in A \backslash B$. As $e$ is in a circle, we can remove it from $(V,E \backslash B)$ without disconnecting the graph. So $B \cup {e} \in C$.  That means exchange property is held.\\
 	    	
